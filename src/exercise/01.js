@@ -3,12 +3,12 @@
 
 import * as React from 'react'
 
-function Greeting() {
-  // 💣 delete this variable declaration and replace it with a React.useState call
-  const [name, setName] = React.useState('')
+// Extra Credit 01: 💯 accept an initialName
+// Make the Greeting accept a prop called initialName and initialize the name state to that value.
+function Greeting({initialName = ''}) { // Extra Credit 01: 💯 accept an initialName
+  const [name, setName] = React.useState(initialName) // Extra Credit 01: 💯 accept an initialName
 
   function handleChange(event) {
-    // 🐨 update the name here based on event.target.value
     setName(event.target.value)
   }
 
@@ -16,7 +16,7 @@ function Greeting() {
     <div>
       <form>
         <label htmlFor="name">Name: </label>
-        <input onChange={handleChange} id="name" />
+        <input placeholder={name} onChange={handleChange} id="name" /> {/* Extra Credit 01: 💯 accept an initialName (placeholder) */}
       </form>
       {name ? <strong>Hello {name}</strong> : 'Please type your name'}
     </div>
@@ -24,7 +24,7 @@ function Greeting() {
 }
 
 function App() {
-  return <Greeting />
+  return <Greeting initialName="Yoda" /> // Extra Credit 01: 💯 accept an initialName
 }
 
 export default App
