@@ -4,15 +4,16 @@
 import * as React from 'react'
 
 function Greeting({initialName = ''}) {
-  // Extra Credit 01: 💯 lazy state initialization
-  // Make the React.useState call use lazy initialization to avoid a performance bottleneck of reading into localStorage on every render.
-  // 💰 You can do this by passing a function to React.useState instead of a value.
-  // 💰 The function will only be called on the initial render. It will be called with the initial state.
-  const [name, setName] = React.useState(() => window.localStorage.getItem('name') || initialName) // Extra Credit 01: 💯 lazy state initialization
+  const [name, setName] = React.useState(
+    () => window.localStorage.getItem('name') || initialName,
+  )
 
+  // Extra Credit 02: 💯 effect dependencies
+  // Add a dependencies array for React.useEffect to avoid the callback being called too frequently.
+  // 💰 The dependencies array should be an array with the name state variable in it.
   React.useEffect(() => {
     window.localStorage.setItem('name', name)
-  })
+  }, [name]) // only run when name changes (dependency array) - Extra Credit 02: 💯 effect dependencies
 
   function handleChange(event) {
     setName(event.target.value)
